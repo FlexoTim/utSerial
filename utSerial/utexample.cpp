@@ -33,6 +33,8 @@ namespace utPetoi {
 			}
 			~utfExample_NoFlush()
 			{
+				size_t count{ utSerial.available() };
+				EXPECT_EQ(0U, count) << count << " bytes unread data\n";
 			}
 		protected:
 			bool on_test(int len)
@@ -46,6 +48,8 @@ namespace utPetoi {
 						<< ", Bytes read: " << result.length()
 						<< ", String read: " << result << endl;
 
+					size_t expected_len{ (0 < len) ? bytes_wrote : bytes_wrote + len };
+					EXPECT_EQ(expected_len, result.length()) << "read mismatch\n";
 					count += 1;
 				}
 				return true;
@@ -99,6 +103,8 @@ namespace utPetoi {
 			}
 			~utfExample_Flush()
 			{
+				size_t count{ utSerial.available() };
+				EXPECT_EQ(0U, count) << count << " bytes unread data\n";
 			}
 		protected:
 			bool on_flush_input()
@@ -123,6 +129,8 @@ namespace utPetoi {
 						<< ", Bytes read: " << result.length()
 						<< ", String read: " << result << endl;
 
+					size_t expected_len{ (0 < len) ? bytes_wrote : bytes_wrote + len};
+					EXPECT_EQ(expected_len, result.length()) << "read mismatch\n";
 					EXPECT_TRUE(on_flush_input());
 					count += 1;
 				}
