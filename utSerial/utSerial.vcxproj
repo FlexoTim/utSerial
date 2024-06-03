@@ -95,10 +95,10 @@ $(TargetPath) --gtest_repeat=1 --gtest_filter="*.*" --port=COM6 --baud=115200</C
       <AdditionalDependencies>$(OutDir)serial.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>echo $(TargetPath) --help
+      <Command>echo $(TargetPath) -h
 echo $(TargetPath) --gtest_list_tests
-echo $(TargetPath) --gtest_repeat=1 --gtest_filter="*.*" --port=COM6 --baud=115200
-$(TargetPath) --gtest_repeat=1 --gtest_filter="TimeoutValue*.*" --port=COM6 --baud=115200
+$(TargetPath) --gtest_repeat=1 --gtest_filter="*.*" --port=COM6 --baud=115200
+
 </Command>
     </PostBuildEvent>
     <PostBuildEvent>
